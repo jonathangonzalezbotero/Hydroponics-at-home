@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
+  repo_name = "TalentoBogotaFedesoft/IT-TALENT-CAN-GRUPO_3_POTE_LA_RECURS" unless repo_name.include?("/")
+  "https://github.com/TalentoBogotaFedesoft/IT-TALENT-CAN-GRUPO_3_POTE_LA_RECURS.git"
 end
 
 
