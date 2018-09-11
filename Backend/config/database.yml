@@ -10,8 +10,14 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  adapter: mysql2
+  username: root
+  password: parroquia
+  host: localhost
+  port: 3306
+  pool: 5
+  timeout: 5000
+  database: hidroponia
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
