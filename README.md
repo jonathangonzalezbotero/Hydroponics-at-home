@@ -7,4 +7,4 @@ Jonathan Gonzalez Botero
 # ARQUITECTURA DEL PROYECTO
 Backend: Ruby on rails
 Database: Mysql
-Frontend: Ionic, Angularjs
+Frontend: Ionic

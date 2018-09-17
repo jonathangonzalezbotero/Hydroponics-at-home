@@ -11,7 +11,7 @@
             <li><%= link_to "Inicio", root_path %></li>
             <li><%= link_to "Servicios", root_path %></li>
             <li><%= link_to "Nosotros", root_path %></li>
-            <li><%= link_to "Registrese", new_user_path %></li>
+            <li><%= link_to "Iniciar sesión", new_user_path %></li>
           </ul>
         </div>
     </div>
@@ -28,7 +28,7 @@
           Productos <span>Hidropónicos </span><br>
           de alta <span>Calidad</span>
         </h1>
-        <a href="#" class="primary-btn2 header-btn text-uppercase">Registrate</a>
+        <%= link_to "Registrate", new_user_path, class:"primary-btn2 header-btn text-uppercase" %>
       </div>
     </div>
   </div>
