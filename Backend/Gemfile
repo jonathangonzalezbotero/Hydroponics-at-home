@@ -5,6 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/TalentoBogotaFedesoft/IT-TALENT-CAN-GRUPO_3_POTE_LA_RECURS.git"
 end
 
+gem 'composite_primary_keys'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'simple_form', '~> 4.0', '>= 4.0.1'
+
 gem 'yaml_db'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'

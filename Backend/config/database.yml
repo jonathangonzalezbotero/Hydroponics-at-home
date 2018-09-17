@@ -4,17 +4,19 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'mysql2'
 #
-default: &default
+server: &server
   adapter: mysql2
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  encoding: unicode
+  reconnect: false
+  pool: 5
+  host: localhost
+  port: 3306
   timeout: 5000
 
 development:
   adapter: mysql2
   username: root
   password: parroquia
-  host: localhost
-  port: 3306
   pool: 5
   timeout: 5000
   database: hidroponia
@@ -23,9 +25,17 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: db/test.sqlite3
+  adapter: mysql2
+  username: root
+  password: parroquia
+  pool: 5
+  timeout: 5000
+  database: hidroponia_test
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+    adapter: mysql2
+    username: root
+    password: parroquia
+    pool: 5
+    timeout: 5000
+    database: hidroponia_production
