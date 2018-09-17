@@ -24,44 +24,6 @@
   </head>
 
   <body>
-    <header class="default-header">
-      <nav class="navbar navbar-expand-lg  navbar-light">
-        <div class="container">
-              <%= link_to image_tag("logo.png", border: 0), root_path %>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
-              <ul class="navbar-nav">
-                <li><%= link_to "Inicio", root_path %></li>
-                <li><%= link_to "Servicios", root_path %></li>
-                <li><%= link_to "Nosotros", root_path %></li>
-                <li><%= link_to "Registrese", root_path %></li>
-              </ul>
-            </div>
-        </div>
-      </nav>
-    </header>
-    
-    <!-- start banner Area -->
-    <section class="banner-area relative" id="home" data-parallax="scroll" data-image-src="header-bg.jpg">
-      <div class="overlay-bg overlay"></div>
-      <div class="container">
-        <div class="row fullscreen  d-flex align-items-center justify-content-end">
-          <div class="banner-content col-lg-7 col-md-12">
-            <h1>
-              Productos <span>Hidropónicos </span><br>
-              de alta <span>Calidad</span>
-            </h1>
-            <a href="#" class="primary-btn2 header-btn text-uppercase">Registrate</a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End banner Area -->
-
-
     <%= yield %>
   </body>
 </html>
