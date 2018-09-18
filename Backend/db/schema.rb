@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20180918173900) do
 
   create_table "accounts", primary_key: ["type_ID", "id_person"], force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Guarda informacion bancaria para recibir/pagar las ordenes de compra" do |t|
     t.integer "id_person", null: false
@@ -96,18 +96,28 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["id_category"], name: "fk_Producto_Categoria1_idx"
   end
 
+  create_table "roles", primary_key: "idRol", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Tabla maestra para administrar los diferentes perfiles del sistema\t\t" do |t|
+    t.string "Description", limit: 45
+  end
+
   create_table "users", primary_key: ["id_person", "type_ID"], force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Tabla maestra de personas" do |t|
-    t.integer "id_person", null: false, auto_increment: true
+    t.integer "id_person", null: false
     t.string "type_ID", limit: 3, null: false
     t.string "first_name", limit: 70
     t.string "last_name", limit: 45
     t.integer "telephone"
     t.string "address", limit: 50
     t.string "email", limit: 50
-    t.string "username", limit: 50
     t.string "password", limit: 50
     t.binary "image", limit: 4294967295
-    t.string "role", limit: 10, comment: "Consumidor o Cultivador"
+    t.integer "idRol", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["idRol"], name: "fk_Users_Roles1_idx"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "accounts", "users", column: "id_person", primary_key: "id_person", name: "fk_Account_Person1"
@@ -128,4 +138,5 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key "orders", "clients", column: "id_person", primary_key: "id_person", name: "fk_Order_Client1"
   add_foreign_key "orders", "clients", column: "type_ID", primary_key: "type_ID", name: "fk_Order_Client1"
   add_foreign_key "products", "categories", column: "id_category", primary_key: "id_category", name: "fk_Producto_Categoria1"
+  add_foreign_key "users", "roles", column: "idRol", primary_key: "idRol", name: "fk_Users_Roles1"
 end

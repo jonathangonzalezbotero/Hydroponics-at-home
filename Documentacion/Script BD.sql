@@ -10,6 +10,19 @@ CREATE SCHEMA IF NOT EXISTS `hidroponia` DEFAULT CHARACTER SET utf8 ;
 USE `hidroponia` ;
 
 -- -----------------------------------------------------
+-- Table `hidroponia`.`Roles`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `hidroponia`.`Roles` ;
+
+CREATE TABLE IF NOT EXISTS `hidroponia`.`Roles` (
+  `idRol` INT NOT NULL AUTO_INCREMENT,
+  `Description` VARCHAR(45) NULL,
+  PRIMARY KEY (`idRol`))
+ENGINE = InnoDB
+COMMENT = 'Tabla maestra para administrar los diferentes perfiles del sistema		';
+
+
+-- -----------------------------------------------------
 -- Table `hidroponia`.`Users`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hidroponia`.`Users` ;
@@ -22,11 +35,16 @@ CREATE TABLE IF NOT EXISTS `hidroponia`.`Users` (
   `telephone` INT NULL,
   `address` VARCHAR(50) NULL,
   `email` VARCHAR(50) NULL,
-  `username` VARCHAR(50) NULL,
   `password` VARCHAR(50) NULL,
   `image` LONGBLOB NULL,
-  `role` VARCHAR(15) NULL COMMENT 'Consumidor o Cultivador',
-  PRIMARY KEY (`id_person`, `type_ID`))
+  `idRol` INT NOT NULL,
+  PRIMARY KEY (`id_person`, `type_ID`),
+  INDEX `fk_Users_Roles1_idx` (`idRol` ASC),
+  CONSTRAINT `fk_Users_Roles1`
+    FOREIGN KEY (`idRol`)
+    REFERENCES `hidroponia`.`Roles` (`idRol`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 COMMENT = 'Tabla maestra de personas';
 
