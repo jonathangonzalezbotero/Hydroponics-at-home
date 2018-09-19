@@ -23,9 +23,25 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    
+      <nav class="navbar navbar-default">
+        <div class="container">
+              <%= link_to image_tag("logo.png", border: 0) %>
+
+              <ul class="nav navbar-nav">
+              <% if user_signed_in? %>
+                  <li>
+                    <%= link_to "Perfil", new_profile_path %>
+                    <%= link_to "Mis productos", products_path %>
+                    <%= link_to "Mis pedidos", profiles_path %>
+                    <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %>
+                  </li>
+                <% else %>
+                  <li><%= link_to "Iniciar sesión", new_user_session_path %></li>
+                <% end %>
+              </ul>
+        </div>
+      </nav>
+
     <%= yield %>
   </body>
 </html>

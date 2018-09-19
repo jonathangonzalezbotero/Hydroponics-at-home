@@ -5,14 +5,14 @@ class ProfilesController < ApplicationController
   end
 
   def new
-    @profiles = Profile.new
+    @profile = current_user.profiles.build
   end
 
   def create
-    @profiles = Profile.new(profile_params)
+    @profile = current_user.profiles.build(profile_params)
 
-    if @profiles.save
-      redirect_to root_path
+    if @profile.save
+      redirect_to profiles_path
     else
       render 'new'
     end
@@ -21,10 +21,10 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profiles).permit(:id_person, :type_ID, :first_name, :last_name, :idRol)
+    params.require(:profile).permit(:id_person, :type_ID, :first_name, :last_name, :id_role)
   end
 
   def find_profile
-    @profiles = Profile.find(params[:id])
+    @profiles = Profile.find(params[:id_person])
   end
 end

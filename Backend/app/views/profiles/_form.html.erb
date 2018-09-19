@@ -1,10 +1,10 @@
-<%= simple_form_for @profiles, validate: true do |f| %>
+<%= simple_form_for @profile, validate: true do |f| %>
   <%= f.input :id_person, label: 'Numero de identificación', error: 'Numero de identificación es obligatorio', required: true %>
   <%= f.input :type_ID, label: 'Tipo de identificación', collection: [['CC', 'Cedula de ciudadania'], ['NIT', 'Nit']], label_method: :second, value_method: :first, include_blank: false%>
   <%= f.input :first_name, label: 'Nombres', error: 'El nombre de la persona es obligatorio', required: true %>
   <%= f.input :last_name, label: 'Apellidos', error: 'Los apellidos son obligatorios', required: true %>
   <%= f.input :role, label: 'Registrarme como' do %>
-    <%= f.select :idRol, Role.find(1,2).map { |r| [r.Description] } %>
+    <%= f.select :id_role, Role.find(1,2).map { |r| [r.description, r.id_role] } %>
   <% end %>
   <%= f.button :submit, "Actualizar mis datos" %>
 <% end %>

@@ -1,18 +1,4 @@
-<header class="default-header">
-  <nav class="navbar navbar-expand-lg  navbar-light">
-    <div class="container">
-          <%= link_to image_tag("logo.png", border: 0), root_path %>
-        <div >
-          <ul class="navbar-nav">
-            <li><%= link_to "Iniciar sesión", profiles_path %></li>
-          </ul>
-        </div>
-    </div>
-  </nav>
-</header>
-
 <!-- Start project Area -->
-<section class="project-area section-gap" id="project">
   <div class="container">
     <div class="row d-flex justify-content-center">
       <div class="menu-content pb-40 col-lg-8">
@@ -22,8 +8,11 @@
             de alta <span>Calidad</span>
           </h1>
           <p>‘Hidroponía en casa’ es una plataforma web dedicada a la comercialización de productos hidropónicos al por mayor y detal.</p>
-          <br><br>
-          <%= link_to "Registrate", new_user_registration_path, class:"primary-btn2 header-btn text-uppercase" %>
+
+          <% if !user_signed_in? %>
+            <br><br>
+            <%= link_to "Registrate", new_user_registration_path, class:"primary-btn2 header-btn text-uppercase" %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -35,5 +24,4 @@
       </div>
     </div>
   </div>
-</section>
 <!-- End project Area -->

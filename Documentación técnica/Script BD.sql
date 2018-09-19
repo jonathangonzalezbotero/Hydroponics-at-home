@@ -15,9 +15,9 @@ USE `hidroponia` ;
 DROP TABLE IF EXISTS `hidroponia`.`Roles` ;
 
 CREATE TABLE IF NOT EXISTS `hidroponia`.`Roles` (
-  `idRol` INT NOT NULL AUTO_INCREMENT,
-  `Description` VARCHAR(45) NULL,
-  PRIMARY KEY (`idRol`))
+  `id_role` INT NOT NULL AUTO_INCREMENT,
+  `description` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_role`))
 ENGINE = InnoDB
 COMMENT = 'Tabla maestra para administrar los diferentes perfiles del sistema		';
 
@@ -28,13 +28,13 @@ COMMENT = 'Tabla maestra para administrar los diferentes perfiles del sistema		'
 DROP TABLE IF EXISTS `hidroponia`.`Users` ;
 
 CREATE TABLE IF NOT EXISTS `hidroponia`.`Users` (
-  `idUser` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(50) NULL,
   `encrypted_password` VARCHAR(255) NOT NULL DEFAULT '',
   `reset_password_token` VARCHAR(255) NULL DEFAULT NULL,
   `reset_password_sent_at` DATETIME NULL DEFAULT NULL,
   `remember_created_at` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`idUser`))
+  PRIMARY KEY (`user_id`))
 ENGINE = InnoDB;
 
 
@@ -51,19 +51,19 @@ CREATE TABLE IF NOT EXISTS `hidroponia`.`Profiles` (
   `telephone` INT NULL,
   `address` VARCHAR(50) NULL,
   `image` LONGBLOB NULL,
-  `idRol` INT NOT NULL,
-  `idUser` INT NOT NULL,
+  `id_role` INT NOT NULL,
+  `user_id` INT NOT NULL,
   PRIMARY KEY (`id_person`, `type_ID`),
-  INDEX `fk_Users_Roles1_idx` (`idRol` ASC),
-  INDEX `fk_Profile_Users1_idx` (`idUser` ASC),
+  INDEX `fk_Users_Roles1_idx` (`id_role` ASC),
+  INDEX `fk_Profile_Users1_idx` (`user_id` ASC),
   CONSTRAINT `fk_Users_Roles1`
-    FOREIGN KEY (`idRol`)
-    REFERENCES `hidroponia`.`Roles` (`idRol`)
+    FOREIGN KEY (`id_role`)
+    REFERENCES `hidroponia`.`Roles` (`id_role`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Profile_Users1`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `hidroponia`.`Users` (`idUser`)
+    FOREIGN KEY (`user_id`)
+    REFERENCES `hidroponia`.`Users` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -300,8 +300,8 @@ COMMENT = 'Guarda informacion bancaria para recibir/pagar las ordenes de compra'
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `hidroponia`;
-INSERT INTO `hidroponia`.`Roles` (`idRol`, `Description`) VALUES (1, 'Cultivador');
-INSERT INTO `hidroponia`.`Roles` (`idRol`, `Description`) VALUES (2, 'Cliente');
-INSERT INTO `hidroponia`.`Roles` (`idRol`, `Description`) VALUES (3, 'Administrador');
+INSERT INTO `hidroponia`.`Roles` (`id_role`, `description`) VALUES (1, 'Cultivador');
+INSERT INTO `hidroponia`.`Roles` (`id_role`, `description`) VALUES (2, 'Cliente');
+INSERT INTO `hidroponia`.`Roles` (`id_role`, `description`) VALUES (3, 'Administrador');
 
 COMMIT;
