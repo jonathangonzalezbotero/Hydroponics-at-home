@@ -28,21 +28,42 @@ COMMENT = 'Tabla maestra para administrar los diferentes perfiles del sistema		'
 DROP TABLE IF EXISTS `hidroponia`.`Users` ;
 
 CREATE TABLE IF NOT EXISTS `hidroponia`.`Users` (
+  `idUser` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(50) NULL,
+  `encrypted_password` VARCHAR(255) NOT NULL DEFAULT '',
+  `reset_password_token` VARCHAR(255) NULL DEFAULT NULL,
+  `reset_password_sent_at` DATETIME NULL DEFAULT NULL,
+  `remember_created_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`idUser`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `hidroponia`.`Profiles`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `hidroponia`.`Profiles` ;
+
+CREATE TABLE IF NOT EXISTS `hidroponia`.`Profiles` (
   `id_person` INT NOT NULL,
   `type_ID` VARCHAR(3) NOT NULL,
   `first_name` VARCHAR(70) NULL,
   `last_name` VARCHAR(45) NULL,
   `telephone` INT NULL,
   `address` VARCHAR(50) NULL,
-  `email` VARCHAR(50) NULL,
-  `password` VARCHAR(50) NULL,
   `image` LONGBLOB NULL,
   `idRol` INT NOT NULL,
+  `idUser` INT NOT NULL,
   PRIMARY KEY (`id_person`, `type_ID`),
   INDEX `fk_Users_Roles1_idx` (`idRol` ASC),
+  INDEX `fk_Profile_Users1_idx` (`idUser` ASC),
   CONSTRAINT `fk_Users_Roles1`
     FOREIGN KEY (`idRol`)
     REFERENCES `hidroponia`.`Roles` (`idRol`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Profile_Users1`
+    FOREIGN KEY (`idUser`)
+    REFERENCES `hidroponia`.`Users` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -102,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `hidroponia`.`Clients` (
   PRIMARY KEY (`id_person`, `type_ID`),
   CONSTRAINT `fk_Client_Person1`
     FOREIGN KEY (`id_person` , `type_ID`)
-    REFERENCES `hidroponia`.`Users` (`id_person` , `type_ID`)
+    REFERENCES `hidroponia`.`Profiles` (`id_person` , `type_ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -170,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `hidroponia`.`Cultivators` (
   PRIMARY KEY (`type_ID`, `id_person`),
   CONSTRAINT `fk_Cultivator_Person1`
     FOREIGN KEY (`id_person` , `type_ID`)
-    REFERENCES `hidroponia`.`Users` (`id_person` , `type_ID`)
+    REFERENCES `hidroponia`.`Profiles` (`id_person` , `type_ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -268,8 +289,19 @@ CREATE TABLE IF NOT EXISTS `hidroponia`.`Accounts` (
   INDEX `fk_Account_Person1_idx` (`id_person` ASC, `type_ID` ASC),
   CONSTRAINT `fk_Account_Person1`
     FOREIGN KEY (`id_person` , `type_ID`)
-    REFERENCES `hidroponia`.`Users` (`id_person` , `type_ID`)
+    REFERENCES `hidroponia`.`Profiles` (`id_person` , `type_ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 COMMENT = 'Guarda informacion bancaria para recibir/pagar las ordenes de compra';
+
+-- -----------------------------------------------------
+-- Data for table `hidroponia`.`Roles`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `hidroponia`;
+INSERT INTO `hidroponia`.`Roles` (`idRol`, `Description`) VALUES (1, 'Cultivador');
+INSERT INTO `hidroponia`.`Roles` (`idRol`, `Description`) VALUES (2, 'Cliente');
+INSERT INTO `hidroponia`.`Roles` (`idRol`, `Description`) VALUES (3, 'Administrador');
+
+COMMIT;
