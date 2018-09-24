@@ -45,7 +45,7 @@ DROP TABLE IF EXISTS `hidroponia`.`Profiles` ;
 
 CREATE TABLE IF NOT EXISTS `hidroponia`.`Profiles` (
   `id_person` INT NOT NULL,
-  `type_ID` VARCHAR(3) NOT NULL,
+  `type_ID` VARCHAR(3) NULL,
   `first_name` VARCHAR(70) NULL,
   `last_name` VARCHAR(45) NULL,
   `telephone` INT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `hidroponia`.`Profiles` (
   `image` LONGBLOB NULL,
   `id_role` INT NOT NULL,
   `user_id` INT NOT NULL,
-  PRIMARY KEY (`id_person`, `type_ID`),
+  PRIMARY KEY (`id_person`),
   INDEX `fk_Users_Roles1_idx` (`id_role` ASC),
   INDEX `fk_Profile_Users1_idx` (`user_id` ASC),
   CONSTRAINT `fk_Users_Roles1`
@@ -114,16 +114,15 @@ DROP TABLE IF EXISTS `hidroponia`.`Clients` ;
 
 CREATE TABLE IF NOT EXISTS `hidroponia`.`Clients` (
   `id_person` INT NOT NULL,
-  `type_ID` VARCHAR(3) NOT NULL,
   `kind_person` VARCHAR(15) NULL COMMENT 'Juridica o Natrual',
   `nit` VARCHAR(20) NULL,
   `description` VARCHAR(45) NULL,
   `url` VARCHAR(45) NULL,
-  INDEX `fk_Client_Person1_idx` (`id_person` ASC, `type_ID` ASC),
-  PRIMARY KEY (`id_person`, `type_ID`),
+  INDEX `fk_Client_Person1_idx` (`id_person` ASC),
+  PRIMARY KEY (`id_person`),
   CONSTRAINT `fk_Client_Person1`
-    FOREIGN KEY (`id_person` , `type_ID`)
-    REFERENCES `hidroponia`.`Profiles` (`id_person` , `type_ID`)
+    FOREIGN KEY (`id_person`)
+    REFERENCES `hidroponia`.`Profiles` (`id_person`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -140,12 +139,11 @@ CREATE TABLE IF NOT EXISTS `hidroponia`.`Orders` (
   `total` DECIMAL(20) NULL,
   `application_date` DATE NULL,
   `id_person` INT NOT NULL,
-  `type_ID` VARCHAR(3) NOT NULL,
-  INDEX `fk_Order_Client1_idx` (`id_person` ASC, `type_ID` ASC),
+  INDEX `fk_Order_Client1_idx` (`id_person` ASC),
   PRIMARY KEY (`id_order`),
   CONSTRAINT `fk_Order_Client1`
-    FOREIGN KEY (`id_person` , `type_ID`)
-    REFERENCES `hidroponia`.`Clients` (`id_person` , `type_ID`)
+    FOREIGN KEY (`id_person`)
+    REFERENCES `hidroponia`.`Clients` (`id_person`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -185,13 +183,12 @@ DROP TABLE IF EXISTS `hidroponia`.`Cultivators` ;
 
 CREATE TABLE IF NOT EXISTS `hidroponia`.`Cultivators` (
   `id_person` INT NOT NULL,
-  `type_ID` VARCHAR(3) NOT NULL,
   `birth_day` DATE NULL,
   `gender` VARCHAR(1) NULL,
-  PRIMARY KEY (`type_ID`, `id_person`),
+  PRIMARY KEY (`id_person`),
   CONSTRAINT `fk_Cultivator_Person1`
-    FOREIGN KEY (`id_person` , `type_ID`)
-    REFERENCES `hidroponia`.`Profiles` (`id_person` , `type_ID`)
+    FOREIGN KEY (`id_person`)
+    REFERENCES `hidroponia`.`Profiles` (`id_person`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -226,16 +223,15 @@ DROP TABLE IF EXISTS `hidroponia`.`Cultivator_has_Products` ;
 
 CREATE TABLE IF NOT EXISTS `hidroponia`.`Cultivator_has_Products` (
   `id_person` INT NOT NULL,
-  `type_ID` VARCHAR(3) NOT NULL,
   `id_product` INT NOT NULL,
   `availability` INT NULL,
   `update_date` DATE NULL COMMENT 'Tabla para actualizar la disponibilidad de cada producto',
-  INDEX `fk_Cultivator_has_Product_Cultivator1_idx` (`id_person` ASC, `type_ID` ASC),
+  INDEX `fk_Cultivator_has_Product_Cultivator1_idx` (`id_person` ASC),
   INDEX `fk_Cultivator_has_Product_Product1_idx` (`id_product` ASC),
-  PRIMARY KEY (`id_person`, `type_ID`, `id_product`),
+  PRIMARY KEY (`id_person`, `id_product`),
   CONSTRAINT `fk_Cultivator_has_Product_Cultivator1`
-    FOREIGN KEY (`id_person` , `type_ID`)
-    REFERENCES `hidroponia`.`Cultivators` (`id_person` , `type_ID`)
+    FOREIGN KEY (`id_person`)
+    REFERENCES `hidroponia`.`Cultivators` (`id_person`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Cultivator_has_Product_Product1`
@@ -254,15 +250,14 @@ DROP TABLE IF EXISTS `hidroponia`.`Dispatches` ;
 
 CREATE TABLE IF NOT EXISTS `hidroponia`.`Dispatches` (
   `id_person` INT NOT NULL,
-  `type_ID` VARCHAR(3) NOT NULL,
   `id_order` INT NOT NULL,
   `dispatch_date` DATE NULL,
-  INDEX `fk_Dispatch_Cultivator1_idx` (`id_person` ASC, `type_ID` ASC),
+  INDEX `fk_Dispatch_Cultivator1_idx` (`id_person` ASC),
   INDEX `fk_Dispatches_Orders1_idx` (`id_order` ASC),
-  PRIMARY KEY (`id_order`, `type_ID`, `id_person`),
+  PRIMARY KEY (`id_order`, `id_person`),
   CONSTRAINT `fk_Dispatch_Cultivator1`
-    FOREIGN KEY (`id_person` , `type_ID`)
-    REFERENCES `hidroponia`.`Cultivators` (`id_person` , `type_ID`)
+    FOREIGN KEY (`id_person`)
+    REFERENCES `hidroponia`.`Cultivators` (`id_person`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Dispatches_Orders1`
@@ -281,15 +276,14 @@ DROP TABLE IF EXISTS `hidroponia`.`Accounts` ;
 
 CREATE TABLE IF NOT EXISTS `hidroponia`.`Accounts` (
   `id_person` INT NOT NULL,
-  `type_ID` VARCHAR(3) NOT NULL,
   `type_account` VARCHAR(45) NULL COMMENT 'Ahorro, Corriente, Credito',
   `number` INT NULL,
   `name_bank` VARCHAR(45) NULL,
-  PRIMARY KEY (`type_ID`, `id_person`),
-  INDEX `fk_Account_Person1_idx` (`id_person` ASC, `type_ID` ASC),
+  PRIMARY KEY (`id_person`),
+  INDEX `fk_Account_Person1_idx` (`id_person` ASC),
   CONSTRAINT `fk_Account_Person1`
-    FOREIGN KEY (`id_person` , `type_ID`)
-    REFERENCES `hidroponia`.`Profiles` (`id_person` , `type_ID`)
+    FOREIGN KEY (`id_person`)
+    REFERENCES `hidroponia`.`Profiles` (`id_person`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

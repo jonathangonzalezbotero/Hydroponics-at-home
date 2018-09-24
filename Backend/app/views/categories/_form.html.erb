@@ -1,0 +1,5 @@
+<%= simple_form_for @category, validate: true do |f| %>
+  <%= f.input :name, label: 'Nombre de la categoria', required: true %>
+  <%= f.input :description, label: 'Descripción'%>
+  <%= f.button :submit, "Guardar" %>
+<% end %>

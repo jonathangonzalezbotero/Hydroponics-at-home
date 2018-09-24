@@ -30,9 +30,13 @@
               <ul class="nav navbar-nav">
               <% if user_signed_in? %>
                   <li>
-                    <%= link_to "Perfil", new_profile_path %>
+                    <% if current_user.profiles == nil %>
+                      <%= link_to "Per", new_profile_path %>
+                    <% else %>
+                      <%= link_to 'Edit profile', edit_profile_path( 1033739673), :class => 'navbar-link' %> |
+                    <% end %>
                     <%= link_to "Mis productos", products_path %>
-                    <%= link_to "Mis pedidos", profiles_path %>
+                    <%= link_to "Categorias", categories_path %>
                     <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %>
                   </li>
                 <% else %>
