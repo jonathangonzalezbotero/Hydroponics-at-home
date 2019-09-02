@@ -1,10 +1,10 @@
-# PROYECTO HIDROPONIA EN CASA
-Es el proyecto de para la localidad de Ciudad Bolivar de Potencializar la recursividad, el detalle de este proyecto lo encuentras en la carpeta interna de documentación
+# HYDROPONICS AT HOME
+This project focuses on the potentialization of recursion for the Colombian households
 
-# INTEGRANTE
+# TEAM MEMBER
 Jonathan Gonzalez Botero
 
-# ARQUITECTURA DEL PROYECTO
+# PROJECT ARCHITECTURE
 Backend: Ruby on rails
-Database: Mysql
-Frontend: Ionic
+Database: PostgreSQL
+Frontend: Angular/Ionic
