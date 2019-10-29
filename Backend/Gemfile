@@ -8,7 +8,7 @@ end
 gem 'composite_primary_keys'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'simple_form', '~> 4.0', '>= 4.0.1'
-gem 'devise', '~> 4.5'
+gem 'devise', '~> 4.7'
 gem 'bootstrap-generators'
 gem 'rails_12factor'
 
