@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'composite_primary_keys'
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'bootstrap-sass', '~> 3.4'
 gem 'simple_form', '~> 4.0', '>= 4.0.1'
 gem 'devise', '~> 4.5'
 gem 'bootstrap-generators'
