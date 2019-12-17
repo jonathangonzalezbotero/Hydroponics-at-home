@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @categories = Category.all.map { |r| [r.name, r.id_category] }
   end
 
   # GET /products/1/edit
@@ -25,7 +26,7 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
-    @product.id_category = params[:id_category]
+      @product.id_category = params[:id_category]
 
       if @product.save
         redirect_to products_path
