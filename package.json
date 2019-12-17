@@ -2,4 +2,9 @@
   "name": "hidroponia",
   "private": true,
   "dependencies": {}
+  "scripts" :
+  { "preinstall" : "./configure"
+  , "install" : "make && make install"
+  , "test" : "make test"
+  }
 }
