@@ -43,6 +43,7 @@ GEM
     arel (8.0.0)
     autoprefixer-rails (9.1.4)
       execjs
+    bcrypt (3.1.12)
     bcrypt (3.1.12-x86-mingw32)
     bindex (0.5.0)
     bootstrap-generators (3.3.4)
@@ -71,7 +72,7 @@ GEM
     composite_primary_keys (10.0.5)
       activerecord (~> 5.1.0, >= 5.1.6)
     concurrent-ruby (1.0.5)
-    crass (1.0.4)
+    crass (1.0.5)
     devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -80,6 +81,7 @@ GEM
       warden (~> 1.2.3)
     erubi (1.7.1)
     execjs (2.7.0)
+    ffi (1.9.25)
     ffi (1.9.25-x86-mingw32)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -88,21 +90,25 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
-    loofah (2.2.2)
+    loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
     method_source (0.9.0)
     mini_mime (1.0.1)
-    mini_portile2 (2.3.0)
+    mini_portile2 (2.4.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    mysql2 (0.5.2)
     mysql2 (0.5.2-x86-mingw32)
     nio4r (2.3.1)
-    nokogiri (1.8.4-x86-mingw32)
-      mini_portile2 (~> 2.3.0)
+    nokogiri (1.10.7)
+      mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.7-x86-mingw32)
+      mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    pg (0.18.4)
     pg (0.18.4-x86-mingw32)
     public_suffix (3.0.3)
     puma (3.12.0)
@@ -198,6 +204,7 @@ GEM
       rake (>= 0.8.7)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
